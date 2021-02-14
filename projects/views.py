@@ -62,3 +62,10 @@ def EditProject(request, id):
             }
         r = requests.put(ROOT_API_URL + f'project-app/projects/{id}/', data=updated_data)
         return redirect('list-project')
+
+
+def DetailProject(request, id):
+    if request.method == 'GET':
+        r = requests.get(ROOT_API_URL + f'project-app/projects/{id}')
+        project_data = r.json()
+        return render(request, 'projects/detail.html', context=project_data)

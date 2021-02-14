@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-6 h2">
+        <h1 style="color: #c9126e">{{ name|title }}</h1>
+    </div>
+    <div class="col-sm-6">
+        <p class="text-right h2">
+            <a href="{% url 'edit-project' id %}" style="color: green"> Edit project</a>
+        </p>
+    </div>
+</div>
+<hr>
+{% endblock %}
