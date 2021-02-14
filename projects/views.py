@@ -8,10 +8,21 @@ from teamwork_frontend.config import ROOT_API_URL
 
 
 def ListProjects(request):
+
     r = requests.get(ROOT_API_URL + 'project-app/projects/')
-    project_list = r.json()
-    print(project_list)
-    context = {'message': 'success', 'projects': project_list}
+    project_list_data = r.json()
+    next_page = project_list_data.get('next')
+    prev_page = project_list_data.get('previous')
+    count = project_list_data.get('count')
+    results = project_list_data.get('results')
+
+    context = {
+        'projects': results,
+        'next_page': next_page,
+        'prev_page': prev_page,
+        'count': count,
+        }
+
     return render(request, 'projects/list.html', context=context)
 
 
@@ -34,10 +45,20 @@ def CreateProject(request):
 
 def DeleteProject(request, id):
     r = requests.delete(ROOT_API_URL + f'project-app/projects/{id}/')
-    # if r.status == '404':
-    #     context = {'message': 'No such object exists.'}
-    # elif r.status == '200':
-    #     context = {'message': 'Object deleted successfully.'}
 
     return redirect('list-project')
 
+
+def EditProject(request, id):
+
+    if request.method == 'GET':
+        r = requests.get(ROOT_API_URL + f'project-app/projects/{id}')
+        project_data = r.json()
+        return render(request, 'projects/edit.html', context=project_data)
+    else:
+        updated_data = {
+                'name': request.POST['name'],
+                'description': request.POST['description']
+            }
+        r = requests.put(ROOT_API_URL + f'project-app/projects/{id}/', data=updated_data)
+        return redirect('list-project')

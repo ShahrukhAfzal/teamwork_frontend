@@ -1,6 +1,33 @@
 {% extends 'base.html' %}
-
 {% block content %}
     <h1>Edit Project</h1>
+    <form action="{% url 'edit-project' id %}" method="POST" >
+        {% csrf_token %}
+        <div class="form-row">
+            <div class="col">
+                <input type="text"
+                class="form-control"
+                placeholder="name"
+                name="name"
+                maxlength="20"
+                value="{{ name }}"
+                >
+            </div>
+            <div class="col">
+                <input type="text"
+                class="form-control"
+                placeholder="description"
+                name="description"
+                maxlength=190
+                value="{{ description }}"
+
+                >
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-primary">Edit Project</button>
+            </div>
+        </div>
+    </form>
+
 
 {% endblock %}
