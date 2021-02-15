@@ -32,10 +32,14 @@ def CreateProject(request):
     else:
         name = request.POST['name']
         description = request.POST['description']
+        start_date = request.POST['start_date']
+        end_date = request.POST['end_date']
 
         context = {
             'name': name,
-            'description': description
+            'description': description,
+            'start_date': start_date,
+            'end_date': end_date,
         }
 
         r = requests.post(ROOT_API_URL + 'project-app/projects/', data=context)
