@@ -2,21 +2,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row">
-        <div class="col-sm-6 h2">Project listing</div>
+    <div class="row pb-3">
+        <div class="col-sm-6 h2">All Projects</div>
 
         <div class="col-sm-6">
             <p class="text-right h2"><a href="{% url 'create-project' %}" style="color: green"> Add new project</a></p>
         </div>
     </div>
-    <table class="table table-hover">
-        <thead>
+
+    <!-- Project listing  -->
+    <table class="table table-hover table-bordered">
+        <thead class="thead-dark">
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Description</th>
-                <th scope="col">Created at</th>
-                <th scope="col">Delete</th>
+                <th scope="col" style="width: 10%">#</th>
+                <th scope="col"style="width: 30%" class="text-center">Name</th>
+                <th scope="col"style="width: 40%" class="text-center">Description</th>
+                <th scope="col"style="width: 20%" class="text-center">Created at</th>
             </tr>
 
         </thead>
@@ -24,14 +25,13 @@
             {% for each in projects %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="{% url 'detail-project' each.id %}" style='text-decoration: None'> {{ each.name }} </a></td>
-                    <td>{{ each.description|slice:":50" }}</td>
-                    <td>{{ each.created_at }}</td>
-                    <td><a href="{% url 'delete-project' each.id %}"  style="color: maroon">Delete</a></td>
+                    <td class="text-center">
+                        <a href="{% url 'detail-project' each.id %}" style='text-decoration: None'> {{ each.name }} </a></td>
+                    <td class="text-center">{{ each.description|slice:":50" }}</td>
+                    <td class="text-center">{{ each.created_at }}</td>
                 </tr>
             {% endfor %}
         </tbody>
-        <!-- <caption>List of projects</caption> -->
     </table>
 
 {% endblock %}

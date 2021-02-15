@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Edit Task: {{ name }}</h2>
+    <h2 class="text-secondary">Edit Task: <a href="{% url 'detail-task' project_id id %}">{{ name }}</a></h2>
+
     <form action="{% url 'edit-task' project_id=project_id task_id=id %}" method="POST" >
         {% csrf_token %}
         <div class="form-row">
@@ -25,9 +26,6 @@
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-outline-primary">Save Task</button>
-                <button class="btn btn-outline-danger">
-                    <a href="{% url 'delete-task' project_id id %}">Delete</a>
-                </button>
             </div>
         </div>
     </form>
