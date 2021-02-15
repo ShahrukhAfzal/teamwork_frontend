@@ -24,7 +24,7 @@
             {% for each in projects %}
                 <tr>
                     <th scope="row">{{ forloop.counter }}</th>
-                    <td><a href="{% url 'detail-project' each.id %}"> {{ each.name }} </a></td>
+                    <td><a href="{% url 'detail-project' each.id %}" style='text-decoration: None'> {{ each.name }} </a></td>
                     <td>{{ each.description|slice:":50" }}</td>
                     <td>{{ each.created_at }}</td>
                     <td><a href="{% url 'delete-project' each.id %}"  style="color: maroon">Delete</a></td>

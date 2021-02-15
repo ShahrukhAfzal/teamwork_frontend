@@ -1,35 +1,49 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="row">
-    <div class="col-sm-6 h2">
-        <h1 style="color: #c9126e"> {{ name|title }}</h1>
+    <!-- Project Header -->
+    <div class="col-sm-8 h2">
+        <h1 style="color: #c9126e">Project: {{ name|title }}</h1>
     </div>
-    <div class="col-sm-6">
-        <p class="text-right h2">
-            <a href="{% url 'edit-project' id %}" style="color: green"> Edit project</a>
-        </p>
+
+    <!-- Edit and Delete -->
+    <div class="col-sm-4">
+        <div class="row h5">
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-4">
+                <p class="text-right">
+                    <a href="{% url 'edit-project' id %}" class="btn btn-outline-primary btn">Edit</a>
+                </p>
+            </div>
+            <div class="col-sm-4 ">
+                <p class="text-left ">
+                    <a href="{% url 'delete-project' id %}" class="btn btn-outline-danger">Delete</a>
+                </p>
+            </div>
+
+        </div>
     </div>
 </div>
 <hr>
 
 <div class="row">
+    <!-- Project Description -->
     <div class="col-sm-8">
         <h3><span>Description:</span></h3>
         {{ description }}
     </div>
+
+    <!-- task listing -->
     <div class="col-sm-4">
-        {% if not tasks %}
-            <h4 class="text-danger">!!! No task exists !!! </h4>
-            <div class="col">
-                <a href="{% url 'create-task' id %}"><h3 class="text-right">Create New</h3></a>
-            </div>
-        {% else %}
+        <div class="col">
+            <a href="{% url 'create-task' id %}"><h3 class="text-right">Create New</h3></a>
+        </div>
+
+        {% if tasks %}
         <div class="row">
             <div class="col">
                 <h3 class="text-left">Tasks:</h3>
-            </div>
-            <div class="col">
-                <a href="{% url 'create-task' id %}"><h3 class="text-right">Create New</h3></a>
             </div>
 
         </div>
@@ -53,6 +67,8 @@
             {% endfor %}
           </tbody>
         </table>
+        {% else %}
+            <h4 class="text-danger" style="font-style: italic;">!!! No task exists !!! </h4>
         {% endif %}
     </div>
 </div>

@@ -61,7 +61,7 @@ def EditProject(request, id):
                 'description': request.POST['description']
             }
         r = requests.put(ROOT_API_URL + f'project-app/projects/{id}/', data=updated_data)
-        return redirect('list-project')
+        return redirect('detail-project', id=id)
 
 
 def DetailProject(request, id):

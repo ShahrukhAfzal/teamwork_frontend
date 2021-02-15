@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Edit Project: {{ name }}</h2>
+    <h2 class="text-secondary">Edit Project: <a href="{% url 'detail-project' id %}">{{ name }}</a></h2>
     <form action="{% url 'edit-project' id %}" method="POST" >
         {% csrf_token %}
         <div class="form-row">
@@ -25,9 +25,6 @@
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-outline-primary">Save Project</button>
-                <button class="btn btn-outline-danger">
-                    <a href="{% url 'delete-project' id %}">Delete</a>
-                </button>
             </div>
         </div>
     </form>
