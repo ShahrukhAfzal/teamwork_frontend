@@ -66,6 +66,54 @@ def EditProject(request, id):
 
 def DetailProject(request, id):
     if request.method == 'GET':
-        r = requests.get(ROOT_API_URL + f'project-app/projects/{id}')
+        r = requests.get(ROOT_API_URL + f'project-app/projects/{id}/')
         project_data = r.json()
         return render(request, 'projects/detail.html', context=project_data)
+
+
+def CreateTask(request, id):
+    if request.method == 'GET':
+        return render(request, 'tasks/create.html', context={'id': id})
+    elif request.method == 'POST':
+        name = request.POST['name']
+        description = request.POST['description']
+
+        context = {
+            'name': name,
+            'description': description,
+            'project': id
+        }
+
+        r = requests.post(ROOT_API_URL + 'project-app/tasks/', data=context)
+        return redirect('detail-project', id=id)
+
+
+def DetailTask(request, project_id, task_id):
+    if request.method == 'GET':
+        r = requests.get(ROOT_API_URL + f'project-app/tasks/{task_id}/')
+        task_data = r.json()
+        task_data['project_id'] = project_id
+
+        return render(request, 'tasks/detail.html', context=task_data)
+
+
+def EditTask(request, project_id, task_id):
+    if request.method == 'GET':
+        r = requests.get(ROOT_API_URL + f'project-app/tasks/{task_id}/')
+        task_data = r.json()
+        task_data['project_id'] = project_id
+        return render(request, 'tasks/edit.html', context=task_data)
+    else:
+        updated_data = {
+                'name': request.POST['name'],
+                'description': request.POST['description']
+            }
+        updated_data['project'] = project_id
+        r = requests.put(ROOT_API_URL + f'project-app/tasks/{task_id}/', data=updated_data)
+        return redirect('detail-project', id=project_id)
+
+
+def DeleteTask(request, project_id, task_id):
+    r = requests.delete(ROOT_API_URL + f'project-app/tasks/{task_id}/')
+
+    return redirect('detail-project', id=project_id)

@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
+
 {% block content %}
-    <h2>Edit Project: {{ name }}</h2>
-    <form action="{% url 'edit-project' id %}" method="POST" >
+    <h3>Create New Task for Project {{ id }}</h3>
+    <form action="{% url 'create-task' id %}" method="POST" >
         {% csrf_token %}
         <div class="form-row">
+
             <div class="col">
                 <input type="text"
                 class="form-control"
                 placeholder="name"
                 name="name"
                 maxlength="20"
-                value="{{ name }}"
                 >
             </div>
             <div class="col">
@@ -19,18 +20,13 @@
                 placeholder="description"
                 name="description"
                 maxlength=190
-                value="{{ description }}"
-
                 >
             </div>
             <div class="col">
-                <button type="submit" class="btn btn-outline-primary">Save Project</button>
-                <button class="btn btn-outline-danger">
-                    <a href="{% url 'delete-project' id %}">Delete</a>
-                </button>
+                <button type="submit" class="btn btn-primary">Create Task</button>
             </div>
         </div>
     </form>
-
-
 {% endblock %}
+
+
