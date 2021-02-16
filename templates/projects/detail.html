@@ -2,8 +2,13 @@
 {% block content %}
 <div class="row">
     <!-- Project Header -->
-    <div class="col-sm-8 h2">
+    <div class="col-sm-8">
         <h1 style="color: #c9126e">Project: {{ name|title }}</h1>
+        <div>
+            <span style="color: #043b47">
+                Duration ({{ start_date }} --- {{ end_date }})
+            </span>
+        </div>
     </div>
 
     <!-- Edit and Delete -->
@@ -15,11 +20,13 @@
                 <p class="text-right">
                     <a href="{% url 'edit-project' id %}" class="btn btn-outline-primary btn">Edit</a>
                 </p>
+                created_at:
             </div>
             <div class="col-sm-4 ">
                 <p class="text-left ">
                     <a href="{% url 'delete-project' id %}" class="btn btn-outline-danger">Delete</a>
                 </p>
+                {{ created_at }}
             </div>
         </div>
     </div>
