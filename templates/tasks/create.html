@@ -3,7 +3,9 @@
 {% block content %}
 
 <div class="col-sm-6 offset-3">
-    <h3>New Task for Project {{ id }}</h3>
+    <h3>
+        New Task for Project <a href="{% url 'detail-project' id %}">{{ id }}</a>
+    </h3>
     <form action="{% url 'create-task' id %}" method="POST" >
         {% csrf_token %}
         <div class="form-group">
