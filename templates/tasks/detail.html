@@ -2,11 +2,15 @@
 {% block content %}
 
 <div class="row">
-    <div class="col-sm-8 h2">
+    <div class="col-sm-8">
         <h1 style="color: #c9126e">
             Task: <a href="{% url 'detail-task' project_id id %}">{{ name|title }}</a>
-
         </h1>
+        <div>
+            <span style="color: #043b47">
+                Duration ({{ start_date }} --- {{ end_date }})
+            </span>
+        </div>
     </div>
 
     <div class="col-sm-4">
@@ -17,11 +21,15 @@
                 <p class="text-right">
                     <a href="{% url 'edit-task' project_id id %}" class="btn btn-outline-primary btn">Edit</a>
                 </p>
+                created_at:
             </div>
             <div class="col-sm-4 ">
                 <p class="text-left ">
                     <a href="{% url 'delete-task' project_id id %}" class="btn btn-outline-danger">Delete</a>
                 </p>
+                <div style="color: #043b47">
+                    {{ created_at }}
+                </div>
             </div>
         </div>
     </div>

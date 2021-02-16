@@ -1,32 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h3>Create New Task for Project {{ id }}</h3>
+
+<div class="col-sm-6 offset-3">
+    <h3>New Task for Project {{ id }}</h3>
     <form action="{% url 'create-task' id %}" method="POST" >
         {% csrf_token %}
-        <div class="form-row">
+        <div class="form-group">
+            <input type="text" class="form-control" name="name" placeholder="Enter Task Name" maxlength="20">
+            <small class="form-text text-muted">Task name should not contain more than 20 characters.</small>
+        </div>
 
-            <div class="col">
-                <input type="text"
+        <div class="form-group">
+            <textarea name="description"
                 class="form-control"
-                placeholder="name"
-                name="name"
-                maxlength="20"
-                >
+                placeholder="Enter Task Description"
+                style="width: 100%; height:100px;"
+                maxlength="190"
+            >
+            </textarea>
+            <small class="form-text text-muted">Task description should not contain more than 190 characters.</small>
+        </div>
+
+
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    Task Start Date <input type="datetime-local" name="start_date" class="form-control">
+                </div>
             </div>
             <div class="col">
-                <input type="text"
-                class="form-control"
-                placeholder="description"
-                name="description"
-                maxlength=190
-                >
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary">Create Task</button>
+                <div class="form-group">
+                    Task End Date <input type="datetime-local" name="end_date" class="form-control">
+                </div>
             </div>
         </div>
+
+       <button type="submit" class="btn btn-outline-primary"
+        style="width: 100%">Create Task</button>
     </form>
+</div>
 {% endblock %}
 
 
